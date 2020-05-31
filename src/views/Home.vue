@@ -1,18 +1,24 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-container>
+    <h1 class="display-2 pa-3">
+      欢迎
+    </h1>
+    <PeopleList />
+  </v-container>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+  import PeopleList from "@/components/PeopleList";
+  export default {
+    name: 'Home',
+    components: {PeopleList},
+    data: () => ({
 
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+    }),
+    computed: {
+      routes () {
+        return this.$router.options.routes.filter(el => el.path !== '/' && !el.meta.hide)
+      }
+    }
   }
-}
 </script>
