@@ -4,7 +4,10 @@
       v-model="dialog.active"
       max-width="800px"
     >
-      <ImageDetails :image="dialog.image"
+      <ImageDetails
+        :image="dialog.image"
+        @close="dialog.active = false"
+      />
     </v-dialog>
     <v-btn :to="{name: 'Home'}">
       <v-icon left>
@@ -25,17 +28,11 @@
         lg="2"
         xl="2"
       >
-        <v-card :color="iglist.includes(image.imageId) ? 'black' : 'white'">
-          <div>
-            <v-img
-              :src="imageSrc(image)"
-              aspect-ratio="1"
-              :gradient="iglist.includes(image.imageId) ? 'to bottom, rgba(0,0,0,.9), rgba(0,0,0,.9)' : 'to bottom, rgba(0,0,0,.0), rgba(55, 55, 55,.0)'"
-              @mousedown="view(image)"
-              @mouseup="dialog.active = false"
-            />
-          </div>
-
+        <v-card @click="view(image)">
+          <v-img
+            :src="imageSrc(image)"
+            aspect-ratio="1"
+          />
           <v-card-title
             class="my-0 mx-0 px-0 py-0 mt-1 monospace justify-center"
             style="font-size: 16px"
@@ -43,51 +40,21 @@
             {{ image.imageId }}
           </v-card-title>
 
-          <v-card-actions
-            style="z-index:999999"
-            :class="{'white--text': iglist.includes(image.imageId)}"
-          >
-            <v-spacer />
-            <v-btn
-              icon
-              small
-              :color="iglist.includes(image.imageId) ? 'blue' : 'red'"
-              @click="iglist.includes(image.imageId) ? remove(image.imageId) : add(image.imageId)"
-            >
+          <v-card-actions>
+            <v-btn icon>
               <v-icon>
-                {{ iglist.includes(image.imageId) ? "mdi-check-circle" : "mdi-delete" }}
+                mdi-star
               </v-icon>
             </v-btn>
-            <v-btn
-              color="error"
-              x-small
-              @click="add(image.imageId, true)"
-            >
-              全局忽略
+            <v-spacer />
+            <v-btn icon>
+              <v-icon>
+                mdi-download
+              </v-icon>
             </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
-    </v-row>
-    <v-row>
-      <h2>ignores: </h2>
-      <v-card
-        v-for="(ob, i) in iglist"
-        :key="ob + '' + i"
-        class="d-flex ma-1"
-      >
-        <v-card-title class="body-1 my-0 py-0 mx-0 px-0 ml-2">
-          {{ Array.isArray(ob) ? ( "精确#" + [ob[0].substr(0, 8) + '..', ob[1]].join("+") ) : "全局#" + ob }}
-        </v-card-title>
-        <v-btn
-          icon
-          @click="remove(ob)"
-        >
-          <v-icon>
-            mdi-close-circle
-          </v-icon>
-        </v-btn>
-      </v-card>
     </v-row>
   </v-container>
 </template>
@@ -96,6 +63,7 @@
   import NameRender from "@/components/NameRender";
   import get from "@/utils/get";
   import ImageDetails from "@/components/ImageDetails";
+  import {deliver} from "@/utils/deliver";
   export default {
     name: "PersonDetails",
     components: {ImageDetails, NameRender},
@@ -109,11 +77,8 @@
 
     data() {
       return {
-        iglist: JSON.parse(localStorage.getItem("IGNOREDIMGS")) || [],
         dialog: {
           active: false,
-          src: "",
-          ratio: -1,
           image: {}
         }
       }
@@ -126,27 +91,12 @@
       images() {
         return get.image.byPersonId(this.personId)
       },
-      get () { return get }
-    },
-
-    watch: {
-      iglist(newValue) {
-        localStorage.setItem("IGNOREDIMGS", JSON.stringify(newValue))
-      }
     },
 
     methods: {
       imageSrc(image) {
-        return `http://192.168.1.238:8080/${image['imageId']}?mode=thumb`
+        return deliver(image, "thumb")
       },
-      add(i, glo) {
-        if (glo) {
-          this.iglist.push(i)
-        } else {
-          this.iglist.push([this.personId, i])
-        }
-      },
-      remove(i) {this.iglist = this.iglist.filter(el => el !== i)},
       view (image) {
         this.dialog.active = true;
         this.dialog.image = image

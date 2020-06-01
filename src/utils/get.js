@@ -22,6 +22,19 @@ Collection.person = {
   all () {
     return base["people"]
   },
+  categorized () {
+    const categories = [{
+      name: "同学",
+      filter: (el) => !el["isTeacher"]
+    }, {
+      name: "老师",
+      filter: (el) => el["isTeacher"]
+    }]
+    return categories.map(category => {
+      category["results"] = this.all().filter(category.filter)
+      return category
+    })
+  },
   byPersonId (personId) {
     return this.all().find(el => el["personId"] === personId)
   }

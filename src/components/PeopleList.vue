@@ -1,32 +1,29 @@
 <template>
   <v-container>
     <v-row
+      v-for="category in categorizedPeople"
+      :key="category.name"
       align="center"
-      justify="center"
+      justify="start"
     >
+      <v-col cols="12">
+        <Subheader>
+          {{ category.name }}
+        </Subheader>
+      </v-col>
       <v-col
-        v-for="person in people"
-        :key="person.id"
+        v-for="person in category.results"
+        :key="person.personId"
         cols="6"
         sm="4"
         md="3"
         lg="2"
         xl="2"
+        class="align-self-stretch"
       >
-        <v-card @click="$router.push({name: 'PersonDetails', params: {personId: person.personId}})">
-          <v-card-title>
-            <NameRender :person="person" />
-          </v-card-title>
-          <v-card-subtitle class="caption monospace">
-            {{ person.personId }}
-          </v-card-subtitle>
-          <v-card-actions>
-            <v-spacer />
-            <span class="display-1">
-              {{ get.image.byPersonId(person.personId).length }}
-            </span>
-          </v-card-actions>
-        </v-card>
+        <PersonCard
+          :person="person"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -34,18 +31,17 @@
 
 <script>
   import get from "@/utils/get";
-  import NameRender from "@/components/NameRender";
+  import PersonCard from "@/components/PersonCard";
+  import Subheader from "@/components/Subheader";
 
   export default {
     name: "PeopleList",
-    components: {NameRender},
+    components: {Subheader, PersonCard},
     computed: {
-      people() {
-        return get.person.all();
-      },
-      get () { return get }
+      categorizedPeople() {
+        return get.person.categorized();
+      }
     },
-
   }
 </script>
 

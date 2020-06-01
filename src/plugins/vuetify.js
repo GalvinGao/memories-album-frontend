@@ -9,4 +9,7 @@ export default new Vuetify({
     locales: {zhHans},
     current: 'zh-Hans',
   },
+  theme: {
+    dark: true
+  }
 });
