@@ -1,9 +1,9 @@
 <template>
-  <div class="about">
+  <v-container class="about">
     <h1>This is an about page</h1> <code>
       {{ images }}
     </code>
-  </div>
+  </v-container>
 </template>
 
 <script>

@@ -1,22 +1,7 @@
 <template>
   <v-card>
-    <!--    <v-card-title class="caption">-->
-    <!--      <v-avatar>-->
-    <!--        孟祥宇-->
-    <!--      </v-avatar>-->
-    <!--      <div class="d-flex flex-column">-->
-    <!--        <h3 class="body-1">-->
-    <!--          孟祥宇-->
-    <!--        </h3>-->
-    <!--        <h4 class="body-2">-->
-    <!--          Michael Meng-->
-    <!--        </h4>-->
-    <!--      </div>-->
-    <!--    </v-card-title>-->
-
     <BoxedImage
-      :src="meta.src"
-      :aspect-ratio="meta.ratio"
+      :meta="meta"
       :image="image"
       :faces="faces"
 
@@ -48,46 +33,50 @@
       </v-card>
     </v-card-actions>
 
-    <v-card-subtitle class="subtitle-1 pb-3 mt-4">
-      详细信息
-    </v-card-subtitle>
+    <v-col
+      cols="12"
+    >
+      <v-card-subtitle class="subtitle-1">
+        详细信息
+      </v-card-subtitle>
 
-    <v-card-actions class="mx-2 pt-0">
-      <v-list>
-        <v-list-item>
-          <v-list-item-icon>
-            <v-icon>
-              mdi-calendar
-            </v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title v-text="formatTime(image.time)" />
-            <v-list-item-subtitle v-text="'拍摄时间'" />
-          </v-list-item-content>
-        </v-list-item>
+      <v-card-actions class="mx-2 pt-0">
+        <v-list>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>
+                mdi-calendar
+              </v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title v-text="formatTime(image.time)" />
+              <v-list-item-subtitle v-text="'拍摄时间'" />
+            </v-list-item-content>
+          </v-list-item>
 
-        <v-list-item v-bind="source.binding">
-          <v-list-item-icon>
-            <v-icon>
-              {{ source.icon }}
-            </v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title v-text="source.name" />
-            <v-list-item-subtitle v-text="'图片来源'" />
-          </v-list-item-content>
+          <v-list-item v-bind="source.binding">
+            <v-list-item-icon>
+              <v-icon>
+                {{ source.icon }}
+              </v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title v-text="source.name" />
+              <v-list-item-subtitle v-text="'图片来源'" />
+            </v-list-item-content>
 
-          <v-list-item-action v-if="source.binding">
-            <v-icon>
-              mdi-open-in-app
-            </v-icon>
-            <v-list-item-action-text>
-              查看文章
-            </v-list-item-action-text>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list>
-    </v-card-actions>
+            <v-list-item-action v-if="source.binding">
+              <v-icon>
+                mdi-open-in-app
+              </v-icon>
+              <v-list-item-action-text>
+                查看文章
+              </v-list-item-action-text>
+            </v-list-item-action>
+          </v-list-item>
+        </v-list>
+      </v-card-actions>
+    </v-col>
 
     <v-card-actions class="align-start body-2">
       <v-btn>
@@ -116,11 +105,16 @@
         type: Object,
         required: true
       },
+      active: {
+        type: Boolean,
+        required: true
+      },
     },
     computed: {
       meta () {
         return {
           src: deliver(this.image),
+          thumb: deliver(this.image, "thumb"),
           ratio: this.image.width / this.image.height,
         }
       },
@@ -143,6 +137,11 @@
           }
         }
         return types.source[type]
+      }
+    },
+    watch: {
+      image() {
+        this.loaded = false
       }
     },
     methods: {

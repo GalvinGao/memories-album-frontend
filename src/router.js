@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home'
 import PersonDetails from "@/views/PersonDetails";
+import About from "@/views/About";
 
 Vue.use(VueRouter)
 
@@ -15,15 +16,15 @@ const routes = [
       title: "主页"
     }
   },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   component: About,
-  //   meta: {
-  //     icon: "mdi-information",
-  //     title: "关于"
-  //   }
-  // },
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
+    meta: {
+      icon: "mdi-information",
+      title: "关于开发者"
+    }
+  },
   {
     path: '/person/:personId',
     name: 'PersonDetails',
@@ -31,13 +32,17 @@ const routes = [
     props: true,
     meta: {
       icon: 'mdi-account-details',
-      title: '详情'
+      title: '详情',
+      hide: true
     }
   }
 ]
 
 const router = new VueRouter({
   mode: 'history',
+  scrollBehavior() { // params: (to, from, savedPosition)
+    return { x: 0, y: 0 }
+  },
   base: process.env.BASE_URL,
   routes
 })

@@ -1,12 +1,26 @@
 <template>
-  <div>
+  <div v-resize="updateDimensions">
     <v-img
       ref="boxedImageContent"
-      :src="src"
-      :lazy-src="src + '?mode=thumb'"
-      :aspect-ratio="aspectRatio"
+      :src="meta.src"
+      :lazy-src="meta.thumb"
+      :aspect-ratio="meta.ratio"
       max-width="800px"
     >
+      <v-btn
+        rounded
+        class="face-switch-btn"
+        :color="`secondary darken-${faceActive ? 0 : 2}`"
+        @click="faceActive = !faceActive"
+      >
+        <v-icon
+          left
+          small
+        >
+          {{ faceActive ? "mdi-eye-off" : "mdi-eye" }}
+        </v-icon>
+        {{ faceActive ? "隐藏" : "显示" }}人脸
+      </v-btn>
       <template v-slot:placeholder>
         <v-row
           class="fill-height ma-0"
@@ -20,38 +34,28 @@
         </v-row>
       </template>
     </v-img>
-    <div
-      v-for="face in []"
-      :key="face.faceId"
-      class="box"
-      :style="style(face)"
-    >
-      <span class="box-name">
-        <span style="font-size: 7px">
-          识别结果
-        </span>
-        <NameRender
-          :person="person(face.personId)"
-        />
-      </span>
-    </div>
+    <template v-if="faceActive">
+      <FaceBox
+        v-for="face in faces"
+        :key="face.faceId"
+        :face="face"
+        :image="image"
+        :dimensions="dimensions"
+      />
+    </template>
   </div>
 </template>
 
 <script>
   import get from "@/utils/get"
-  import NameRender from "@/components/NameRender";
+  import FaceBox from "@/components/FaceBox";
 
   export default {
     name: "BoxedImage",
-    components: {NameRender},
+    components: {FaceBox},
     props: {
-      src: {
-        type: String,
-        required: true
-      },
-      aspectRatio: {
-        type: Number,
+      meta: {
+        type: Object,
         required: true
       },
       image: {
@@ -62,52 +66,48 @@
         type: Array,
         required: true
       },
+      // active: {
+      //   type: Boolean,
+      //   required: true
+      // },
+    },
+    data() {
+      return {
+        dimensions: {
+          clientHeight: 0,
+          clientWidth: 0
+        },
+        faceActive: true
+      }
+    },
+    watch: {
+      image() {
+        console.log("boxedimage image changed")
+        this.updateDimensions()
+      }
+    },
+    mounted () {
+      this.$nextTick(function () {
+        console.log("boxedimage mounted nexttick")
+        this.updateDimensions()
+      })
     },
     methods: {
-      style (face) {
-        // if (!(this.$refs.image)) {
-        //   console.log(this.$refs, this.image)
-        //   return {}
-        // }
-        console.log(this.$refs)
-        // const {clientHeight, clientWidth} = this.$refs["boxedImageContent"] && this.$refs["boxedImageContent"].$el
-        const {clientHeight, clientWidth} = {clientHeight: 600, clientWidth: 800}
-
-        const ratioX = (clientWidth / this.image.width)
-        const ratioY = (clientHeight / this.image.height)
-
-        return {
-          top: ratioY * face.faceY + 'px',
-          left: ratioX * face.faceX + 'px',
-          width: ratioX * face.faceWidth + 'px',
-          height: ratioY * face.faceHeight + 'px'
-        }
-      },
-      person (personId) {
-        return get.person.byPersonId(personId)
+      updateDimensions() {
+        const el = this.$refs["boxedImageContent"]["$el"];
+        this.dimensions.clientHeight = el.clientHeight
+        this.dimensions.clientWidth = el.clientWidth
+        console.log("boxedimage updated dimensions to ", this.dimensions.clientHeight, this.dimensions.clientWidth)
       }
     }
   }
 </script>
 
 <style scoped>
-  .box {
-    position: absolute;
-    border: 1px #58ea58 solid;
-
-    z-index: 3;
-  }
-
-  .box-name {
-    position: absolute;
-    background: #c1e5c1;
-    font-size: 80%;
-    margin-top: 120%;
-    font-family: monospace;
-    line-height: 1;
-    width: 150%;
-    left: -25%;
-    overflow: visible;
-    opacity:0.9
-  }
+.face-switch-btn {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 25 !important;
+}
 </style>

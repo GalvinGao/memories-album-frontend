@@ -6,3 +6,13 @@
 
 .light-text-shadow
   text-shadow: 0 0 5px rgba(0, 0, 0, .5)
+
+.slide-fade-enter-active
+  transition: all .175s cubic-bezier(0.165, 0.84, 0.44, 1)
+
+.slide-fade-leave-active
+  transition: all .075s cubic-bezier(0.165, 0.84, 0.44, 1)
+
+.slide-fade-enter, .slide-fade-leave-to
+  transform: translateY(1.5vh)
+  opacity: 0

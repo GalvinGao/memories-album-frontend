@@ -6,6 +6,7 @@
     >
       <ImageDetails
         :image="dialog.image"
+        :active="dialog.active"
         @close="dialog.active = false"
       />
     </v-dialog>
