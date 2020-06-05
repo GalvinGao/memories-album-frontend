@@ -79,10 +79,6 @@
           strategy: "absolute",
           modifiers: [preventOverflow]
         })
-        setTimeout(function () {
-          this.popper.update()
-          this.popper.forceUpdate()
-        }, 50)
 
         console.log("facebox mounted nexttick refs after popper", this.$refs.face.style.left, this.$refs.faceName.style.transform)
       })

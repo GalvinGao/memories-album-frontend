@@ -6,7 +6,7 @@ const Collection = {};
 
 Collection.face = {
   all () {
-    return base["faces"]
+    return base["faces"] || []
   },
   byFaceId (faceId) {
     return this.all().filter(el => el["faceId"] === faceId)
@@ -20,7 +20,7 @@ Collection.face = {
 }
 Collection.person = {
   all () {
-    return base["people"]
+    return base["people"] || []
   },
   categorized () {
     const categories = [{
@@ -41,7 +41,7 @@ Collection.person = {
 }
 Collection.image = {
   all () {
-    return base["images"]
+    return base["images"] || []
   },
   byImageId (imageId) {
     return this.all().find(el => el["imageId"] === imageId)

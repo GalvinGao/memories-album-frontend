@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <v-dialog
       v-model="dialog.active"
       max-width="800px"
@@ -10,14 +10,18 @@
         @close="dialog.active = false"
       />
     </v-dialog>
+
     <v-btn :to="{name: 'Home'}">
       <v-icon left>
         mdi-home
       </v-icon>
       Home
     </v-btn>
+
     <h1 class="d-flex flex-row headline">
       <NameRender :person="person" />
+      <v-spacer />
+      <UploadImages :person="person" />
     </h1>
     <v-row>
       <v-col
@@ -34,26 +38,24 @@
             :src="imageSrc(image)"
             aspect-ratio="1"
           />
-          <v-card-title
-            class="my-0 mx-0 px-0 py-0 mt-1 monospace justify-center"
-            style="font-size: 16px"
-          >
-            {{ image.imageId }}
-          </v-card-title>
-
-          <v-card-actions>
-            <v-btn icon>
-              <v-icon>
-                mdi-star
-              </v-icon>
-            </v-btn>
+          <v-card-title class="title">
+            {{ image.relativeTime.title }}
             <v-spacer />
             <v-btn icon>
               <v-icon>
-                mdi-download
+                mdi-bookmark
               </v-icon>
             </v-btn>
-          </v-card-actions>
+          </v-card-title>
+          <v-card-subtitle class="d-flex">
+            <v-icon
+              x-small
+              class="mr-1"
+            >
+              mdi-clock
+            </v-icon>
+            {{ image.relativeTime.subtitle }}
+          </v-card-subtitle>
         </v-card>
       </v-col>
     </v-row>
@@ -65,9 +67,11 @@
   import get from "@/utils/get";
   import ImageDetails from "@/components/ImageDetails";
   import {deliver} from "@/utils/deliver";
+  import UploadImages from "@/components/UploadImages";
+  import times from "@/utils/times";
   export default {
     name: "PersonDetails",
-    components: {ImageDetails, NameRender},
+    components: {UploadImages, ImageDetails, NameRender},
 
     props: {
       personId: {
@@ -90,7 +94,11 @@
         return get.person.byPersonId(this.personId);
       },
       images() {
-        return get.image.byPersonId(this.personId)
+        return get.image.byPersonId(this.personId).map(el => {
+          el.relativeTime = times.relative(el.time)
+          console.log(el.time, times.dayjs(el.time), el.relativeTime)
+          return el
+        }).sort((a, b) => b.relativeTime.ts - a.relativeTime.ts)
       },
     },
 
