@@ -1,12 +1,10 @@
 import store from "@/store"
 
-const base = store.getters["data/content"]("merged")
-
 const Collection = {};
 
 Collection.face = {
   all () {
-    return base["faces"] || []
+    return store.getters["data/content"]("merged")["faces"] || []
   },
   byFaceId (faceId) {
     return this.all().filter(el => el["faceId"] === faceId)
@@ -20,7 +18,7 @@ Collection.face = {
 }
 Collection.person = {
   all () {
-    return base["people"] || []
+    return store.getters["data/content"]("merged")["people"] || []
   },
   categorized () {
     const categories = [{
@@ -41,7 +39,7 @@ Collection.person = {
 }
 Collection.image = {
   all () {
-    return base["images"] || []
+    return store.getters["data/content"]("merged")["images"] || []
   },
   byImageId (imageId) {
     return this.all().find(el => el["imageId"] === imageId)

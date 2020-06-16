@@ -14,13 +14,14 @@
         上传照片
       </v-btn>
     </template>
-    <v-card>
-      <v-card-title>
+    <v-card color="blue-grey darken-4">
+      <v-card-title class="pb-4">
         上传照片
       </v-card-title>
       <v-card-subtitle>
         向此相册上传更多关于「<NameInline :person="person" />」的照片
       </v-card-subtitle>
+      <v-card-text />
       <v-card-text>
         <file-pond
           ref="pond"
@@ -30,7 +31,7 @@
           :allow-replace="false"
           :instant-upload="true"
 
-          :name="person.personId"
+          :name="personId"
           label-idle="拖拽照片至此 或 <span class=&quot;filepond--label-action&quot;> 选择照片 </span><br><span class='caption'>可上传 <span class='overline'>JPG</span>, <span class='overline'>PNG</span> 与 <span class='overline'>GIF</span> 照片文件</span>"
           file-validate-type-label-expected-types="仅支持最大为 10MB 的 JPG, PNG 或 GIF 照片文件"
           label-file-waiting-for-size="等待照片大小..."
@@ -102,7 +103,9 @@
     props: {
       person: {
         type: Object,
-        required: true
+        default () {
+          return {}
+        }
       },
     },
     data() {
@@ -150,6 +153,11 @@
         },
       }
     },
+    computed: {
+      personId() {
+        return this.person && this.person.personId
+      }
+    }
   }
 </script>
 

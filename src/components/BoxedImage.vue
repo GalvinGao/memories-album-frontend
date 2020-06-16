@@ -10,7 +10,7 @@
       <v-btn
         rounded
         class="face-switch-btn"
-        :color="`secondary darken-${faceActive ? 0 : 2}`"
+        color="secondary darken-2"
         @click="faceActive = !faceActive"
       >
         <v-icon
@@ -19,7 +19,7 @@
         >
           {{ faceActive ? "mdi-eye-off" : "mdi-eye" }}
         </v-icon>
-        {{ faceActive ? "隐藏" : "显示" }}人脸
+        {{ faceActive ? "隐藏" : "显示" }}姓名标记
       </v-btn>
       <template v-slot:placeholder>
         <v-row
@@ -109,5 +109,9 @@
   right: 1rem;
   bottom: 1rem;
   z-index: 25 !important;
+  opacity: 0.3;
 }
+  .face-switch-btn:hover {
+    opacity: 1;
+  }
 </style>

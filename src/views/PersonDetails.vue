@@ -7,19 +7,26 @@
       <ImageDetails
         :image="dialog.image"
         :active="dialog.active"
+        :person="person"
         @close="dialog.active = false"
       />
     </v-dialog>
 
-    <v-btn :to="{name: 'Home'}">
-      <v-icon left>
-        mdi-home
-      </v-icon>
-      Home
-    </v-btn>
+    <v-breadcrumbs
+      :items="breadcrumbs"
+      large
+      class="pa-0 my-3 pb-3"
+    >
+      <template v-slot:divider>
+        <v-icon>mdi-chevron-right</v-icon>
+      </template>
+    </v-breadcrumbs>
 
     <h1 class="d-flex flex-row headline">
-      <NameRender :person="person" />
+      <NameRender
+        :person="person"
+        large
+      />
       <v-spacer />
       <UploadImages :person="person" />
     </h1>
@@ -40,12 +47,12 @@
           />
           <v-card-title class="title">
             {{ image.relativeTime.title }}
-            <v-spacer />
-            <v-btn icon>
-              <v-icon>
-                mdi-bookmark
-              </v-icon>
-            </v-btn>
+            <!--            <v-spacer />-->
+            <!--            <v-btn icon>-->
+            <!--              <v-icon>-->
+            <!--                mdi-bookmark-->
+            <!--              </v-icon>-->
+            <!--            </v-btn>-->
           </v-card-title>
           <v-card-subtitle class="d-flex">
             <v-icon
@@ -100,6 +107,21 @@
           return el
         }).sort((a, b) => b.relativeTime.ts - a.relativeTime.ts)
       },
+      breadcrumbs () {
+        return [
+          {
+            text: "首页",
+            exact: true,
+            to: {
+              name: "Home"
+            }
+          },
+          {
+            text: "人物详情",
+            disabled: true,
+          }
+        ]
+      }
     },
 
     methods: {

@@ -10,7 +10,7 @@ export default {
     },
     upload: {
       icon: "mdi-file-account",
-      name: "由用户 {USER} 上传"
+      name: "由用户上传"
     }
   }
 }

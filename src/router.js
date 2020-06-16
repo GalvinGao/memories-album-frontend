@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home'
 import PersonDetails from "@/views/PersonDetails";
 import About from "@/views/About";
+import Videos from "@/views/Videos";
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,15 @@ const routes = [
     meta: {
       icon: "mdi-home",
       title: "主页"
+    }
+  },
+  {
+    path: '/videos',
+    name: 'Videos',
+    component: Videos,
+    meta: {
+      icon: 'mdi-file-video',
+      title: '纪念视频',
     }
   },
   {
