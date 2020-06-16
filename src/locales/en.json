@@ -1,0 +1,86 @@
+{
+  "app": {
+    "name": "Memories Album by Galvin",
+    "title": [
+      "2020 Graduates",
+      "Memories Album"
+    ],
+    "bar": "· Memories Album",
+    "school": "Kinglee High School"
+  },
+  "home": {
+    "subtitle": "2020 Graduates",
+    "title": "Memories Album"
+  },
+  "hide": "Hide",
+  "show": "Show",
+  "nameBox": " Name Markers",
+  "name": {
+    "teacher": "{name}老师"
+  },
+  "upload": {
+    "title": "Upload",
+    "subtitle": [
+      "Upload more photos about \"",
+      "\" to this album."
+    ],
+    "label": {
+      "idle": "Drag Photos Here or <span class='filepond--label-action'> Select </span><br><span class='caption'>Accepts <span class='overline'>JPG</span>, <span class='overline'>PNG</span> and <span class='overline'>GIF</span> files</span>",
+      "types": "Only accepts JPG, PNG or GIF files up to 10MB",
+      "waitSize": "Waiting for file size...",
+      "loadingImage": "Loading image...",
+      "cantLoadImage": "Cannot load image",
+      "processing": "Uploading...",
+      "tapToRetry": "Tap to Retry",
+      "tapToCancel": "Tap to Cancel",
+      "tapToUndo": "Tap to Undo",
+      "complete": "Successfully uploaded",
+      "error": "An error occurred during upload",
+      "aborted": "Upload aborted",
+      "retry": "Retry",
+      "abort": "Cancel",
+      "invalidType": "File type not supported",
+      "sizeExceeded": "File size too large",
+      "fileSize": "Only accepts files up to {filesize}"
+    }
+  },
+  "dialog": {
+    "close": "Close"
+  },
+  "menu": {
+    "home": "Home",
+    "videos": "Videos",
+    "about": "About Developer",
+    "details": "Person Details",
+    "languages": "Language",
+    "reload": "Reload Data"
+  },
+  "type": {
+    "classmate": "Classmates",
+    "teacher": "Teachers"
+  },
+  "footer": {
+    "credits": "Developer: Galvin Gao"
+  },
+  "details": {
+    "people": "Faces in this photo",
+    "photo": "Details of this photo",
+    "time": "Capture time",
+    "source": "Image source",
+    "viewArticle": "View",
+    "download": "Download original"
+  },
+  "time": {
+    "unknown": {
+      "title": "Unknown time",
+      "subtitle": "Far far away..."
+    },
+    "format": "{date}, about {relative} from today"
+  },
+  "types": {
+    "meta": "Galvin's archive",
+    "article": "News pictures from official website of Kinglee",
+    "upload": "Uploaded by user"
+  },
+  "loading": "Loading..."
+}

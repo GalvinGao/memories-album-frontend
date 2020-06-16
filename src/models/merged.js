@@ -1,4 +1,5 @@
 import ObjectManager from '@/utils/objectManager'
+import commons from './_common'
 
 const merged = new ObjectManager({
   name: 'merged',
@@ -13,7 +14,8 @@ const merged = new ObjectManager({
     })
     return data
   },
-  ttl: 1000 * 60 * 60 * 1
+  ttl: 1000 * 60 * 60 * 1,
+  ajaxHooks: commons.defaultAjaxHooks
 });
 
 export default merged

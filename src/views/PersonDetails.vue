@@ -110,14 +110,14 @@
       breadcrumbs () {
         return [
           {
-            text: "首页",
+            text: this.$t('menu.home'),
             exact: true,
             to: {
               name: "Home"
             }
           },
           {
-            text: "人物详情",
+            text: this.$t('menu.details'),
             disabled: true,
           }
         ]

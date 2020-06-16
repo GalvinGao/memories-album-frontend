@@ -54,7 +54,7 @@
       chinese() {
         if (!this.person || !this.person["chineseName"]) return null
         let [last, first] = this.person["chineseName"].split("|");
-        if (this.isTeacher) first = `${first}老师`
+        if (this.isTeacher) first = this.$t('name.teacher', {name: first})
         return {last, first}
       },
       english () {

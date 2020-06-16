@@ -1,16 +1,18 @@
+import i18n from "@/i18n"
+
 export default {
   source: {
     meta: {
       icon: "mdi-tablet-cellphone",
-      name: "Galvin 的存档",
+      name: i18n.t('types.meta'),
     },
     article: {
       icon: "mdi-web-box",
-      name: "学校网站新闻配图"
+      name: i18n.t('types.article'),
     },
     upload: {
       icon: "mdi-file-account",
-      name: "由用户上传"
+      name: i18n.t('types.upload'),
     }
   }
 }

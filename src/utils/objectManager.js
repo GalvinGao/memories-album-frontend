@@ -12,11 +12,12 @@ class ObjectManager {
    * @param {number} ttl time-to-live (TTL), in milliseconds
    * @param {Object<Function, Function(Promise)>} ajaxHooks the first function will be called before sending the request, and the second function will be called after done receiving the request, with the request Promise as the argument
    */
-  constructor({ name, api, transform, ttl }) {
+  constructor({ name, api, transform, ttl, ajaxHooks }) {
     this.name = name;
     this.api = api;
     this.transform = transform;
     this.ttl = ttl;
+    this.ajaxHooks = ajaxHooks;
   }
 
   get cacheValid() {
@@ -55,6 +56,7 @@ class ObjectManager {
       console.debug("ObjectManager", "cache: valid. id:", this.name);
       return Promise.resolve();
     } else {
+      context.ajaxHooks.request(context.name);
       // outdated cache, fetch api
       console.debug("ObjectManager", `cache: invalid, fetching api. reason:`,
         forced ? '[Force Refresh]' : '[Cache Outdated]',
@@ -75,6 +77,7 @@ class ObjectManager {
 
           return data
         });
+      context.ajaxHooks.response(context.name, response);
       return response;
     }
   }

@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <NetworkBusyIndicator />
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -19,7 +20,7 @@
               class="white--text serif font-weight-regular text-center mt-2"
               style="font-size: 1rem; line-height: 1.8rem;"
             >
-              勤礼外语中学<br>2020 届毕业生纪念相册
+              {{ $t('app.title.0') }}<br>{{ $t('app.title.1') }}
             </span>
           </v-list-item-title>
         </v-list-item-content>
@@ -42,21 +43,29 @@
             <v-icon>{{ route.meta.icon }}</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title>{{ route.meta.title }}</v-list-item-title>
+            <v-list-item-title>{{ $t(`menu.${route.meta.title}`) }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-divider class="mt-2 mb-4" />
+        <v-row
+          justify="space-around"
+        >
+          <v-btn
+            class="mx-2"
+            outlined
+            small
+            @click="$store.dispatch('data/fetch', true)"
+          >
+            <v-icon
+              left
+              small
+            >
+              mdi-database-refresh
+            </v-icon>
+            {{ $t('menu.reload') }}
+          </v-btn>
+        </v-row>
       </v-list>
-
-      <v-btn
-        class="mx-2"
-        color="secondary"
-        @click="$store.dispatch('data/fetch', true)"
-      >
-        <v-icon left>
-          mdi-database-refresh
-        </v-icon>
-        重载数据
-      </v-btn>
 
       <v-footer
         fixed
@@ -73,7 +82,7 @@
           Kinglee High School
         </h6>
         <h5 class="subtitle-2">
-          开发者：Galvin Gao
+          {{ $t('footer.credits') }}
         </h5>
       </v-footer>
     </v-navigation-drawer>
@@ -92,9 +101,11 @@
           width="32px"
         />
         <span class="ml-1 serif">
-          · 纪念相册
+          {{ $t('app.bar') }}
         </span>
       </v-toolbar-title>
+      <v-spacer />
+      <LocaleSwitcher />
     </v-app-bar>
 
     <v-content>
@@ -133,9 +144,14 @@
 
 <script>
 import Footer from "@/components/Footer";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
+import strings from "@/utils/strings";
+import I18n from "@/mixins/I18n";
+import NetworkBusyIndicator from "@/components/NetworkBusyIndicator";
 export default {
   name: 'App',
-  components: {Footer},
+  components: {NetworkBusyIndicator, LocaleSwitcher, Footer},
+  mixins: [I18n],
   data() {
     return {
       drawer: null
@@ -150,6 +166,18 @@ export default {
 
   created () {
     this.$store.dispatch("data/fetch")
+
+    if (this.language) {
+      this.changeLocale(this.language, false)
+    } else {
+      const language = strings.getFirstBrowserLanguage();
+      console.info("i18n", "detected language", language);
+      if (language) {
+        // because this is a detection result, thus we are not storing it,
+        // unless the user manually set one.
+        this.changeLocale(language, false)
+      }
+    }
   },
 };
 </script>

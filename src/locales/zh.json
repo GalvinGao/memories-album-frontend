@@ -1,0 +1,86 @@
+{
+  "app": {
+    "name": "忆 · 纪念相册 by Galvin",
+    "title": [
+      "勤礼外语中学",
+      "2020 届毕业生纪念相册"
+    ],
+    "bar": "· 纪念相册",
+    "school": "勤礼外语中学"
+  },
+  "home": {
+    "subtitle": "2020 届毕业生",
+    "title": "纪念相册"
+  },
+  "hide": "隐藏",
+  "show": "显示",
+  "nameBox": "姓名标记",
+  "name": {
+    "teacher": "{name}老师"
+  },
+  "upload": {
+    "title": "上传照片",
+    "subtitle": [
+      "向此相册上传更多关于「",
+      "」的照片"
+    ],
+    "label": {
+      "idle": "拖拽照片至此 或 <span class='filepond--label-action'> 选择照片 </span><br><span class='caption'>可上传 <span class='overline'>JPG</span>, <span class='overline'>PNG</span> 与 <span class='overline'>GIF</span> 照片文件</span>",
+      "types": "仅支持最大为 10MB 的 JPG, PNG 或 GIF 照片文件",
+      "waitSize": "等待照片大小...",
+      "loadingImage": "正在加载照片...",
+      "cantLoadImage": "无法加载照片",
+      "processing": "正在上传...",
+      "tapToRetry": "轻点以重试",
+      "tapToCancel": "轻点以取消",
+      "tapToUndo": "轻点以撤销",
+      "complete": "上传成功",
+      "error": "上传时出现错误",
+      "aborted": "上传已取消",
+      "retry": "重试",
+      "abort": "取消",
+      "invalidType": "不支持的文件类型",
+      "sizeExceeded": "照片文件过大",
+      "fileSize": "仅可上传最大 {filesize} 的照片文件"
+    }
+  },
+  "dialog": {
+    "close": "关闭"
+  },
+  "menu": {
+    "home": "主页",
+    "videos": "纪念视频",
+    "about": "关于开发者",
+    "details": "人物详情",
+    "languages": "语言切换",
+    "reload": "重载数据"
+  },
+  "type": {
+    "classmate": "同学",
+    "teacher": "老师"
+  },
+  "footer": {
+    "credits": "开发者：Galvin Gao"
+  },
+  "details": {
+    "people": "本照片中人物",
+    "photo": "照片详细信息",
+    "time": "拍摄时间",
+    "source": "图片来源",
+    "viewArticle": "查看文章",
+    "download": "下载原图"
+  },
+  "time": {
+    "unknown": {
+      "title": "未知时间",
+      "subtitle": "遥远的从前..."
+    },
+    "format": "{date}，距今约 {relative}"
+  },
+  "types": {
+    "meta": "Galvin 的存档",
+    "article": "学校网站新闻配图",
+    "upload": "由用户上传"
+  },
+  "loading": "正在加载数据..."
+}

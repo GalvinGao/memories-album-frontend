@@ -8,7 +8,7 @@
     >
       <v-col cols="12">
         <Subheader>
-          {{ category.name }}
+          {{ $t(`type.${category.name}`) }}
         </Subheader>
       </v-col>
       <v-col

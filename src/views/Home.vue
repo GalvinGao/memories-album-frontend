@@ -1,9 +1,10 @@
 <template>
   <div>
     <v-img
-      :aspect-ratio="3224/2448"
+      :aspect-ratio="1944/1296"
       :src="require('@/assets/background.jpg')"
       style="height: 60vh; margin-top: -12px"
+      gradient="to top right, rgba(100,115,201,.1), rgba(25,32,72,.7)"
     >
       <v-col
         cols="12"
@@ -29,13 +30,13 @@
           />
         </div>
         <h6 class="overline">
-          勤礼外语中学
+          {{ $t('app.school') }}
         </h6>
         <h2 class="headline">
-          2020 届毕业生
+          {{ $t('home.subtitle') }}
         </h2>
         <h2 class="headline">
-          纪念相册
+          {{ $t('home.title') }}
         </h2>
       </v-col>
     </v-img>

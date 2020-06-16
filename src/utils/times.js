@@ -1,8 +1,8 @@
 import dayjs from 'dayjs'
+import i18n from "@/i18n";
 import relativeTime from 'dayjs/plugin/relativeTime'
-import zh from 'dayjs/locale/zh'
+import 'dayjs/locale/zh'
 
-dayjs.locale(zh)
 dayjs.extend(relativeTime)
 
 const events = {
@@ -14,16 +14,19 @@ const events = {
 
 export default {
   events,
-  dayjs,
+  get dayjs () {
+    dayjs.locale(i18n.locale)
+    return dayjs
+  },
   format (time) {
-    if (!time) return "未知时间"
+    if (!time) return i18n.t('time.unknown.title')
     const parsed = dayjs(time)
-    return `${parsed.format('YYYY.M.D')}，距今约 ${parsed.fromNow()}`
+    return i18n.t('time.format', {date: parsed.format('YYYY.M.D'), relative: parsed.fromNow()})
   },
   relative (time) {
     if (!time) return {
-      title: `未知时间`,
-      subtitle: "遥远的从前...?",
+      title: i18n.t('time.unknown.title'),
+      subtitle: i18n.t('time.unknown.subtitle'),
       ts: 0
     }
     const parsed = dayjs(time)

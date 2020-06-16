@@ -9,7 +9,7 @@
     />
 
     <v-card-subtitle class="subtitle-1 pb-3 mt-4">
-      本照片中人物
+      {{ $t('details.people') }}
     </v-card-subtitle>
 
     <v-card-actions class="d-flex flex-nowrap overflow-y-auto flex-row px-4 pt-0">
@@ -48,7 +48,7 @@
         md="6"
       >
         <v-card-subtitle class="subtitle-1">
-          照片详细信息
+          {{ $t('details.photo') }}
         </v-card-subtitle>
 
         <v-card-actions class="mx-2 pt-0">
@@ -61,7 +61,7 @@
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title v-text="formatTime(image.time)" />
-                <v-list-item-subtitle v-text="'拍摄时间'" />
+                <v-list-item-subtitle v-text="$t('details.time')" />
               </v-list-item-content>
             </v-list-item>
 
@@ -73,7 +73,7 @@
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title v-text="source.name" />
-                <v-list-item-subtitle v-text="'图片来源'" />
+                <v-list-item-subtitle v-text="$t('details.source')" />
               </v-list-item-content>
 
               <v-list-item-action v-if="source.binding">
@@ -81,7 +81,7 @@
                   mdi-open-in-app
                 </v-icon>
                 <v-list-item-action-text>
-                  查看文章
+                  {{ $t('details.viewArticle') }}
                 </v-list-item-action-text>
               </v-list-item-action>
             </v-list-item>
@@ -107,7 +107,7 @@
             </v-icon>
           </template>
           <v-card-title>
-            下载原图
+            {{ $t('details.download') }}
             <v-icon class="ml-2">
               mdi-image
             </v-icon>

@@ -22,10 +22,10 @@ Collection.person = {
   },
   categorized () {
     const categories = [{
-      name: "同学",
+      name: "classmate",
       filter: (el) => !el["isTeacher"]
     }, {
-      name: "老师",
+      name: "teacher",
       filter: (el) => el["isTeacher"]
     }]
     return categories.map(category => {

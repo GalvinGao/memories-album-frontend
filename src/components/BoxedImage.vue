@@ -19,7 +19,7 @@
         >
           {{ faceActive ? "mdi-eye-off" : "mdi-eye" }}
         </v-icon>
-        {{ faceActive ? "隐藏" : "显示" }}姓名标记
+        {{ faceActive ? $t('hide') : $t('show') }}{{ $t('nameBox') }}
       </v-btn>
       <template v-slot:placeholder>
         <v-row

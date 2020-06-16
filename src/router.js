@@ -14,7 +14,7 @@ const routes = [
     component: Home,
     meta: {
       icon: "mdi-home",
-      title: "主页"
+      title: "home"
     }
   },
   {
@@ -23,7 +23,7 @@ const routes = [
     component: Videos,
     meta: {
       icon: 'mdi-file-video',
-      title: '纪念视频',
+      title: 'videos',
     }
   },
   {
@@ -32,7 +32,7 @@ const routes = [
     component: About,
     meta: {
       icon: "mdi-information",
-      title: "关于开发者"
+      title: "about"
     }
   },
   {
@@ -42,7 +42,7 @@ const routes = [
     props: true,
     meta: {
       icon: 'mdi-account-details',
-      title: '详情',
+      title: 'details',
       hide: true
     }
   }

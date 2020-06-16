@@ -11,15 +11,15 @@
         <v-icon left>
           mdi-upload
         </v-icon>
-        上传照片
+        {{ $t('upload.title') }}
       </v-btn>
     </template>
     <v-card color="blue-grey darken-4">
       <v-card-title class="pb-4">
-        上传照片
+        {{ $t('upload.title') }}
       </v-card-title>
       <v-card-subtitle>
-        向此相册上传更多关于「<NameInline :person="person" />」的照片
+        {{ $t('upload.subtitle.0') }}<NameInline :person="person" />{{ $t('upload.subtitle.1') }}
       </v-card-subtitle>
       <v-card-text />
       <v-card-text>
@@ -32,23 +32,23 @@
           :instant-upload="true"
 
           :name="personId"
-          label-idle="拖拽照片至此 或 <span class=&quot;filepond--label-action&quot;> 选择照片 </span><br><span class='caption'>可上传 <span class='overline'>JPG</span>, <span class='overline'>PNG</span> 与 <span class='overline'>GIF</span> 照片文件</span>"
-          file-validate-type-label-expected-types="仅支持最大为 10MB 的 JPG, PNG 或 GIF 照片文件"
-          label-file-waiting-for-size="等待照片大小..."
-          label-file-loading="正在加载照片..."
-          label-file-load-error="无法加载照片"
-          label-file-processing="正在上传..."
-          label-tap-to-retry="轻点以重试"
-          label-tap-to-cancel="轻点以取消"
-          label-tap-to-undo="轻点以撤销"
-          label-file-processing-complete="上传成功"
-          label-file-processing-error="上传时出现错误"
-          label-file-processing-aborted="上传已取消"
-          label-button-retry-item-processing="重试"
-          label-button-abort-item-processing="取消"
-          label-file-type-not-allowed="不支持的文件类型"
-          label-max-file-size-exceeded="照片文件过大"
-          label-max-file-size="仅可上传最大 {filesize} 的照片文件"
+          :label-idle="$t('upload.label.idle')"
+          :file-validate-type-label-expected-types="$t('upload.label.types')"
+          :label-file-waiting-for-size="$t('upload.label.waitSize')"
+          :label-file-loading="$t('upload.label.loadingImage')"
+          :label-file-load-error="$t('upload.label.cantLoadImage')"
+          :label-file-processing="$t('upload.label.processing')"
+          :label-tap-to-retry="$t('upload.label.tapToRetry')"
+          :label-tap-to-cancel="$t('upload.label.tapToCancel')"
+          :label-tap-to-undo="$t('upload.label.tapToUndo')"
+          :label-file-processing-complete="$t('upload.label.complete')"
+          :label-file-processing-error="$t('upload.label.error')"
+          :label-file-processing-aborted="$t('upload.label.aborted')"
+          :label-button-retry-item-processing="$t('upload.label.retry')"
+          :label-button-abort-item-processing="$t('upload.label.abort')"
+          :label-file-type-not-allowed="$t('upload.label.invalidType')"
+          :label-max-file-size-exceeded="$t('upload.label.sizeExceeded')"
+          :label-max-file-size="$t('upload.label.fileSize')"
 
           accepted-file-types="image/jpg, image/jpeg, image/png, image/gif"
           max-file-size="10MB"
@@ -64,7 +64,7 @@
           text
           @click="active = false"
         >
-          关闭
+          {{ $t('dialog.close') }}
         </v-btn>
       </v-card-actions>
     </v-card>
