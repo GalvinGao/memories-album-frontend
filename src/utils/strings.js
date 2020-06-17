@@ -1,4 +1,14 @@
 import I18n from "@/i18n"
+import marked from "marked"
+
+marked.setOptions({
+  breaks: true,
+  silent: true
+})
+
+function renderMarkdown(content) {
+  return marked(content)
+}
 
 function getFirstBrowserLanguageWithRegionCode() {
   let nav = window.navigator,
@@ -53,4 +63,4 @@ function getFirstBrowserLanguage () {
   }
 }
 
-export default {getFirstBrowserLanguage}
+export default {getFirstBrowserLanguage, renderMarkdown}

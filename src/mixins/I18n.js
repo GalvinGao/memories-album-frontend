@@ -13,6 +13,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('settings', ['language'])
+    ...mapGetters('settings', ['language']),
+    languageFont () {
+      return `lang-${this.$i18n.locale}`
+    },
   },
 }

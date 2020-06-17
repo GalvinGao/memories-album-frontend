@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :class="[languageFont]">
     <NetworkBusyIndicator />
     <v-navigation-drawer
       v-model="drawer"
