@@ -8,8 +8,9 @@
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
 
-    "deploy": "yarn build && yarn upload",
-    "upload": "tar cvf dist.tar dist/ && scp dist.tar uploader:/tmp/dist.tar && ssh -t uploader \"cd /root/memories/ && sudo mv /tmp/dist.tar . && sudo rm -rf dist/ && sudo tar xvf dist.tar\""
+    "deploy": "yarn build && yarn packDist && yarn upload",
+    "packDist": "tar --exclude=dist/fonts -cvf dist.tar dist/",
+    "upload": "scp dist.tar uploader:/tmp/dist.tar && ssh -t uploader \"cd /root/memories/ && sudo mv /tmp/dist.tar . && sudo tar xvf dist.tar\""
   },
   "dependencies": {
     "@mdi/font": "^3.6.95",

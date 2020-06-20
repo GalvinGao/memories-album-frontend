@@ -6,11 +6,8 @@ const merged = new ObjectManager({
   api: "/merged",
   transform: (data) => {
     data.people = data.people.sort((a, b) => {
-      if (("chineseName" in a && "chineseName" in b) && window.Intl && window.Intl.Collator) {
-        return Intl.Collator("zh").compare(a.chineseName, b.chineseName)
-      } else {
-        return a.englishName - b.englishName
-      }
+      if (!a.englishName || !b.englishName) return 0;
+      return a.englishName.split("|").pop().localeCompare(b.englishName.split("|").pop())
     })
     return data
   },

@@ -1,5 +1,7 @@
+const isLocal = !!~window.location.href.indexOf("localhost")
+
 export function deliver (image, mode) {
-  if (~window.location.href.indexOf("localhost")) {
+  if (isLocal) {
     if (image.source === "upload") {
       let base = `https://memories.upyun.galvincdn.com/_development/album/images/`
       // if (mode === "thumb") base += "thumb/"

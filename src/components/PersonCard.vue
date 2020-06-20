@@ -47,7 +47,7 @@
     },
     computed: {
       featured() {
-        return this.person.featured || deliver(get.face.all().find(el => el.personId === this.person.personId), "thumb")
+        return this.person.featured || deliver(get.image.byImageId(get.face.all().find(el => el.personId === this.person.personId).imageId), "thumb")
       }
     },
     methods: {

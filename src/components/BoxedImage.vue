@@ -29,7 +29,8 @@
         >
           <v-progress-circular
             indeterminate
-            color="grey darken-3"
+            color="white"
+            class="drop-shadow"
           />
         </v-row>
       </template>
@@ -113,5 +114,8 @@
 }
   .face-switch-btn:hover {
     opacity: 1;
+  }
+  .drop-shadow {
+    filter: drop-shadow(0 0 5px #000);
   }
 </style>

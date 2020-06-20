@@ -5,6 +5,8 @@
       max-width="800px"
     >
       <ImageDetails
+        v-if="dialog.active"
+
         :image="dialog.image"
         :active="dialog.active"
         :person="person"

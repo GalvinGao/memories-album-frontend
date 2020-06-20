@@ -46,7 +46,27 @@
             <v-list-item-title>{{ $t(`menu.${route.meta.title}`) }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-divider class="mt-2 mb-4" />
+        <v-divider class="mt-2 mb-1" />
+        <v-list-item
+          link
+          href="https://graduation-2020.galvincdn.com"
+          target="_blank"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-web-box</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ $t('menu.index') }} <v-icon
+                small
+                right
+              >
+                mdi-open-in-new
+              </v-icon>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider class="mt-1 mb-4" />
         <v-row
           justify="space-around"
         >
@@ -93,7 +113,11 @@
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title class="d-flex align-center">
+      <v-toolbar-title
+        v-ripple="$route.name !== 'Home'"
+        class="pl-1 pr-2 d-flex align-center cursor-pointer"
+        @click="$route.name === 'Home' ? null : $router.push({name: 'Home'})"
+      >
         <v-img
           :src="require('@/assets/logo.png')"
           aspect-ratio="1"

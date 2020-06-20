@@ -53,6 +53,7 @@
     "about": "关于开发者",
     "details": "人物详情",
     "languages": "语言切换",
+    "index": "纪念项目集",
     "reload": "重载数据"
   },
   "type": {
@@ -67,7 +68,7 @@
     "photo": "照片详细信息",
     "time": "拍摄时间",
     "source": "图片来源",
-    "viewArticle": "查看文章",
+    "viewArticle": "点击以查看文章",
     "download": "下载原图"
   },
   "time": {
